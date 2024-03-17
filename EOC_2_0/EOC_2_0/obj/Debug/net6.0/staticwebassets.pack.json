@@ -1,0 +1,89 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\css\\Style.css",
+      "PackagePath": "staticwebassets\\css\\Style.css"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\img\\coffee.svg",
+      "PackagePath": "staticwebassets\\img\\coffee.svg"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\js\\changeAvaliable.js",
+      "PackagePath": "staticwebassets\\js\\changeAvaliable.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.EOC_2_0.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.EOC_2_0.props",
+      "PackagePath": "build\\EOC_2_0.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.EOC_2_0.props",
+      "PackagePath": "buildMultiTargeting\\EOC_2_0.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.EOC_2_0.props",
+      "PackagePath": "buildTransitive\\EOC_2_0.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
