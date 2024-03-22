@@ -1,6 +1,6 @@
 ﻿@model HomeViewModel
 
- <!--<div class="container">
+<div class="container">
         <main role="main" class="pb-3">
 
           <body class="bg-light">
@@ -11,48 +11,29 @@
                   <h2>Инструкция</h2>
                   <p class="lead">Ниже приведен пример формы, полностью созданной с использованием элементов управления формы Bootstrap. Каждая требуемая группа форм имеет состояние проверки, которое может быть вызвано попыткой отправить форму без ее заполнения.</p>
                 </div>
-            
-                <div class="row g-5">
-                  <div class="col-md-10 col-lg-11">
+
+
                     
-                    <h4 class="mb-3">Адрес для выставления счета</h4>
-                    <form class="needs-validation" novalidate="">
-            
-                        <div class="col-12">
-                          <label for="address" class="form-label">Адрес</label>
-                          <input type="text" class="form-control" id="address" placeholder="ул. Фокина" required="">
-                          <div class="invalid-feedback">
-                            Пожалуйста, введите свой адрес доставки.
-                          </div>
-                        </div>
-            
-                        <div class="col-12">
-                          <label for="address2" class="form-label">Адрес 2 <span class="text-muted">(Необязательно)</span></label>
-                          <input type="text" class="form-control" id="address2" placeholder="квартира или дом">
-                        </div>
-            
-                        <div class="col-md-12">
-                          <label for="country" class="form-label">Страна</label>
-                          <select class="form-select" id="country" required="">
-                            <option value="">Выберите...</option>
-                            <option>Россия</option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Пожалуйста, выберите действующую страну.
-                          </div>
-                        </div>
-            
-                      <hr class="my-4">
-            
-                      <button class="w-100 btn btn-primary btn-lg" type="submit">Продолжить оформление заказа</button>
-                    </form>
+                        @for(int i = 1; i < 7; i++)
+                        {
+                                <h4>
+                                    Уровень @i: 
+                                </h4>
 
-                    <p>
+                                <div class="input-group">
+                                <input type="text" name="str" id="str-@i" class="form-control" value="@Model.inputText.ElementAt(i - 1)" oninput="UpdateSearchList(@i)" onfocus="focusFunction(@i)" />
+                                </div>
 
-                    </p>
+                                <div id="wordList-@i" style="display: none;">
+                                    @Html.Partial("VerbsList", Model.allVerbs.ElementAt(i - 1))
+                                </div>
 
-                  </div>
-                </div>
+                                <div id="wordList2-@i" style="display: none;">
+                                    @Html.Partial("NounsList", Model.allNouns.ElementAt(i - 1))
+                                </div>
+                        }
+                    
+                    
               </main>
             
               <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -76,4 +57,99 @@
         </main>
     </div>
 
--->
+
+@section pageScripts {
+    <script>
+        function autoInput(str, i) {
+            var paragraphValue = document.getElementById(str).innerText;
+            var idStr = "str-" + i;
+            document.getElementById(idStr).value = paragraphValue + ' ';
+
+            UpdateSearchList(i);
+        };
+
+        function focusFunction(i) {
+            var idStr = "str-" + i;
+            var wordListDiv = "#wordList-" + i;
+            var wordList2Div = "#wordList2-" + i;
+            var inputText = document.getElementById(idStr).value;
+
+            $(wordListDiv).show();
+            $(wordList2Div).show();
+
+            for (var index = 1; index <= 6; index++) {
+                if (index !== i) {
+                    blurFunction(index);
+                }
+            }
+        };
+
+        function blurFunction(i) {
+            var idStr = "str-" + i;
+            var wordListDiv = "#wordList-" + i;
+            var wordList2Div = "#wordList2-" + i;
+            var inputText = document.getElementById(idStr).value;
+
+            $(wordListDiv).hide();
+            $(wordList2Div).hide();
+        };
+
+        function UpdateSearchList(i) {
+            var idStr = "str-" + i;
+            var wordList = "#wordList-" + i;
+            var inputText = document.getElementById(idStr).value;
+            var words = inputText.trim().split(' ');
+
+            if (words.length <= 1) {
+                $.ajax({
+                    url: '@Url.Action("GetVerb", "Home")',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: { 
+                        str: inputText,
+                        level: i
+                    },
+                    success: function (data) {
+                        $(wordList).html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+                if (inputText.endsWith(' ')) {
+
+                    UpdateNounSearchList(i);
+                }
+            } else {
+
+                UpdateNounSearchList(i);
+            }
+        };
+
+        function UpdateNounSearchList(i) {
+            var idStr = "str-" + i;
+            var wordList2 = "#wordList2-" + i;
+            var inputText = document.getElementById(idStr).value;
+            var words = inputText.trim().split(' ');
+
+            if (words.length > 3) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("GetNoun", "Home")',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    str: words[1]
+                },
+                success: function (data) {
+                    $(wordList2).html(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        };
+    </script>
+}

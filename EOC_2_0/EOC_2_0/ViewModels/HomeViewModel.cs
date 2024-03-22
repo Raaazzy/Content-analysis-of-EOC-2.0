@@ -5,6 +5,10 @@ namespace EOC_2_0.ViewModels
 {
     public class HomeViewModel
     {
-        public IEnumerable<Verb> allVerbs { get; set; }
+        public List<IEnumerable<Verb>> allVerbs { get; set; }
+
+        public List<IEnumerable<Noun>> allNouns { get; set; }
+
+        public List<string> inputText { get; set; }
     }
 }

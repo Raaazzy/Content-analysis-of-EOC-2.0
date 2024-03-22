@@ -14,6 +14,7 @@ using EOC_2_0.Data.Repository;
 using EOC_2_0.Data.Response;
 using EOC_2_0.Service.Interfaces;
 using EOC_2_0.ViewModels;
+using System.Runtime.CompilerServices;
 
 namespace Automarket.Service.Implementations
 {
@@ -26,33 +27,65 @@ namespace Automarket.Service.Implementations
             _verbRepository = verbRepository;
         }
 
-        public async Task<BaseResponse<Dictionary<long, string>>> GetVerb(string term)
+
+        // ЭТО ПОИСКОВИК
+        public IBaseResponse<List<Verb>> GetVerb(string term, int level)
         {
-            var baseResponse = new BaseResponse<Dictionary<long, string>>();
             try
             {
-                var products = await _verbRepository.GetAll()
-                    .Select(x => new VerbViewModel()
-                    {
-                        Id = x.Id,
-                        Word = x.Word,
-                        Level = x.Level
-                    })
-                    .Where(x => EF.Functions.Like(x.Word, $"%{term}%"))
-                    .ToDictionaryAsync(x => x.Id, t => t.Word);
+                var products = _verbRepository.GetAll().Where(x => x.Level == level && x.Word.StartsWith(term) && x.Word.Contains(term));
 
-                baseResponse.Data = products;
-                return baseResponse;
+                return new BaseResponse<List<Verb>>()
+                {
+                    Data = products.ToList(),
+                    StatusCode = StatusCode.Success
+                };
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Dictionary<long, string>>()
+                return new BaseResponse<List<Verb>>()
                 {
-                    Description = ex.Message,
+                    Description = $"[GetVerbs] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
                 };
             }
         }
+
+        public IBaseResponse<List<Verb>> GetVerbs(int level)
+        {
+            try
+            {
+                var products = _verbRepository.GetAll().Where(x => x.Level == level).ToList();
+                if (!products.Any())
+                {
+                    return new BaseResponse<List<Verb>>()
+                    {
+                        Description = "Найдено 0 глаголов",
+                        StatusCode = StatusCode.Success
+                    };
+                }
+
+                return new BaseResponse<List<Verb>>()
+                {
+                    Data = products,
+                    StatusCode = StatusCode.Success
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<List<Verb>>()
+                {
+                    Description = $"[GetVerbs] : {ex.Message}",
+                    StatusCode = StatusCode.InternalServerError
+                };
+            }
+        }
+
+
+
+
+
+
 
         public async Task<IBaseResponse<VerbViewModel>> GetVerb(long id)
         {
@@ -154,36 +187,6 @@ namespace Automarket.Service.Implementations
                 return new BaseResponse<Verb>()
                 {
                     Description = $"[Edit] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
-                };
-            }
-        }
-
-        public IBaseResponse<List<Verb>> GetVerbs()
-        {
-            try
-            {
-                var products = _verbRepository.GetAll().ToList();
-                if (!products.Any())
-                {
-                    return new BaseResponse<List<Verb>>()
-                    {
-                        Description = "Найдено 0 глаголов",
-                        StatusCode = StatusCode.Success
-                    };
-                }
-
-                return new BaseResponse<List<Verb>>()
-                {
-                    Data = products,
-                    StatusCode = StatusCode.Success
-                };
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse<List<Verb>>()
-                {
-                    Description = $"[GetVerbs] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
                 };
             }

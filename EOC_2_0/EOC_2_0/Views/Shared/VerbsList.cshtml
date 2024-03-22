@@ -1,0 +1,10 @@
+﻿@model List<Verb>
+
+@foreach (var verb in Model)
+    {
+    <a class="list-group-item list-group-item-action lh-tight" onclick='autoInput("@verb.Id-verb", "@verb.Level");'>
+        <div class="d-flex w-70 align-items-center justify-content-between">
+            <p id="@verb.Id-verb" class="mb-1">@verb.Word.ToString()</p>
+        </div>
+    </a>
+    }

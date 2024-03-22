@@ -11,97 +11,83 @@ namespace EOC_2_0.Controllers
     public class HomeController : Controller
     {
         private readonly IVerbService _verbService;
+        private readonly INounService _nounService;
 
-        public HomeController(IVerbService verbService)
+        public HomeController(IVerbService verbService, INounService nounService)
         {
             _verbService = verbService;
+            _nounService = nounService;
         }
 
         [HttpGet]
-        public IActionResult IndexAsync()
+        [HttpPost]
+        public async Task<ActionResult> IndexAsync(string str = null, int level = 1)
         {
-            var response = _verbService.GetVerbs();
+            var response = _verbService.GetVerbs(level);
+            var response2 = _nounService.GetNouns();
             if (response.StatusCode == Data.Enum.StatusCode.Success)
             {
                 HomeViewModel obj = new HomeViewModel();
-                obj.allVerbs = response.Data;
+                obj.allVerbs = new List<IEnumerable<Verb>>();
+                for (int i = 0; i < 6; i++)
+                {
+                    obj.allVerbs.Add(response.Data.Where(x => x.Level == i + 1).ToList());
+                }
+                obj.allNouns = new List<IEnumerable<Noun>>();
+                for (int i = 0; i < 6; i++)
+                {
+                    obj.allNouns.Add(response2.Data);
+                }
+                obj.inputText = new List<string>();
+                for (int i = 0; i < 6; i++)
+                {
+                    obj.inputText.Add(null);
+                }
                 return View(obj);
             }
             return RedirectToAction("Error", $"{response.Description}");
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetVerb(int id)
+        [HttpPost]
+        public async Task<ActionResult> GetVerb(string str = null, int level = 1)
         {
-            var response = await _verbService.GetVerb(id);
-            if (response.StatusCode == Data.Enum.StatusCode.Success)
+            if (!string.IsNullOrEmpty(str))
             {
-                HomeViewModel obj = new HomeViewModel();
-                obj.allVerbs = (IEnumerable<Data.Models.Verb>)response.Data;
-                return View(obj);
-            }
-            return RedirectToAction("Error");
-        }
-
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var response = await _verbService.DeleteVerb(id);
-            if (response.StatusCode == Data.Enum.StatusCode.Success)
-            {
-                return RedirectToAction("GetVerbs");
-            }
-            return RedirectToAction("Error", $"{response.Description}");
-        }
-
-        public IActionResult Compare() => PartialView();
-
-        [HttpGet]
-        public async Task<IActionResult> Save(int id)
-        {
-            if (id == 0)
-            {
-                return PartialView();
+                var response = _verbService.GetVerb(str, level);
+                if (response.StatusCode == Data.Enum.StatusCode.Success)
+                {
+                    return PartialView("VerbsList", response.Data);
+                }
+                return RedirectToAction("Error");
             }
 
-            var response = await _verbService.GetVerb(id);
-            if (response.StatusCode == Data.Enum.StatusCode.Success)
+            var response2 = _verbService.GetVerbs(level);
+            if (response2.StatusCode == Data.Enum.StatusCode.Success)
             {
-                HomeViewModel obj = new HomeViewModel();
-                obj.allVerbs = (IEnumerable<Data.Models.Verb>)response.Data;
-                return View(obj);
+                return PartialView("VerbsList", response2.Data);
             }
-            ModelState.AddModelError("", response.Description);
-            return PartialView();
+            return RedirectToAction("Error", $"{response2.Description}");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(VerbViewModel model)
+        public async Task<ActionResult> GetNoun(string str = null)
         {
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(str))
             {
-                _verbService.Save(model);
+                var response = _nounService.GetNoun(str);
+                if (response.StatusCode == Data.Enum.StatusCode.Success)
+                {
+                    return PartialView("NounsList", response.Data);
+                }
+                return RedirectToAction("Error");
             }
-            return RedirectToAction("GetVerbs");
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> GetVerb(string term)
-        {
-            var response = await _verbService.GetVerb(term);
-            return Json(response.Data);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetVerb(int id, bool isJson)
-        {
-            var response = await _verbService.GetVerb(id);
-            if (isJson)
+            var response2 = _nounService.GetNouns();
+            if (response2.StatusCode == Data.Enum.StatusCode.Success)
             {
-                return Json(response.Data);
+                return PartialView("NounsList", response2.Data);
             }
-            return PartialView("GetVerb", response.Data);
+            return RedirectToAction("Error", $"{response2.Description}");
         }
-
     }
 }

@@ -10,6 +10,7 @@ namespace EOC_2_0.Data
         }
 
         public DbSet<Verb> Verbs { get; set; }
+        public DbSet<Noun> Nouns { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
@@ -20,7 +21,10 @@ namespace EOC_2_0.Data
                 builder.ToTable("ClassifiedVerbs").HasKey(x => x.Id);
             });
 
-            
+            modelBuilder.Entity<Noun>(builder =>
+            {
+                builder.ToTable("Nouns").HasKey(x => x.Id);
+            });
         }
     }
 }

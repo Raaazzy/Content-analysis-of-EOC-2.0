@@ -12,11 +12,13 @@ namespace EOC_2_0
         public static void InitializeRepositories(this IServiceCollection services)
         {
             services.AddScoped<IBaseRepository<Verb>, VerbRepository>();
+            services.AddScoped<IBaseRepository<Noun>, NounRepository>();
         }
 
         public static void InitializeServices(this IServiceCollection services)
         {
             services.AddScoped<IVerbService, VerbService>();
+            services.AddScoped<INounService, NounService>();
         }
     }
 }

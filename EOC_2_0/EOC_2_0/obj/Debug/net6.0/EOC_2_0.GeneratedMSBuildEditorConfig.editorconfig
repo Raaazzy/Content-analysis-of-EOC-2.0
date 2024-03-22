@@ -20,8 +20,12 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Дариджано/Desktop/Универ/Курсач (3 курс)/EOC_2_0/EOC_2_0/Views/Shared/AllVerbs.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFsbFZlcmJzLmNzaHRtbA==
+[C:/Users/Дариджано/Desktop/Универ/Курсач (3 курс)/EOC_2_0/EOC_2_0/Views/Shared/NounsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5vdW5zTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Дариджано/Desktop/Универ/Курсач (3 курс)/EOC_2_0/EOC_2_0/Views/Shared/VerbsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFZlcmJzTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Дариджано/Desktop/Универ/Курсач (3 курс)/EOC_2_0/EOC_2_0/Views/Shared/_Layout.cshtml]
