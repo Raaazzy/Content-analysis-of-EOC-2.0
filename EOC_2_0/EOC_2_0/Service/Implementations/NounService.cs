@@ -29,11 +29,11 @@ namespace Automarket.Service.Implementations
 
 
         // ЭТО ПОИСКОВИК
-        public IBaseResponse<List<Noun>> GetNoun(string term)
+        public IBaseResponse<List<Noun>> GetNoun(string term, int verbId)
         {
             try
             {
-                var products = _nounRepository.GetAll().Where(x => x.Word.StartsWith(term) && x.Word.Contains(term));
+                var products = _nounRepository.GetAll().Where(x => x.VerbId == verbId && x.Word.StartsWith(term) && x.Word.Contains(term));
 
                 return new BaseResponse<List<Noun>>()
                 {
@@ -51,11 +51,11 @@ namespace Automarket.Service.Implementations
             }
         }
 
-        public IBaseResponse<List<Noun>> GetNouns()
+        public IBaseResponse<List<Noun>> GetNouns(int verbId)
         {
             try
             {
-                var products = _nounRepository.GetAll().ToList();
+                var products = _nounRepository.GetAll().Where(x => x.VerbId == verbId).ToList();
                 if (!products.Any())
                 {
                     return new BaseResponse<List<Noun>>()

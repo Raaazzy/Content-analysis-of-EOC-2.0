@@ -12,6 +12,8 @@ namespace EOC_2_0.Data
         public DbSet<Verb> Verbs { get; set; }
         public DbSet<Noun> Nouns { get; set; }
 
+        public DbSet<NewVerb> NewVerbs { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
@@ -24,6 +26,11 @@ namespace EOC_2_0.Data
             modelBuilder.Entity<Noun>(builder =>
             {
                 builder.ToTable("Nouns").HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<NewVerb>(builder =>
+            {
+                builder.ToTable("NewVerbs").HasKey(x => x.Id);
             });
         }
     }

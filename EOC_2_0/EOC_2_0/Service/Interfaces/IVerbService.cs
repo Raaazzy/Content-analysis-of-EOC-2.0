@@ -9,15 +9,6 @@ namespace EOC_2_0.Service.Interfaces
     {
         public IBaseResponse<List<Verb>> GetVerbs(int level);
 
-        public Task<IBaseResponse<VerbViewModel>> GetVerb(long id);
-
         public IBaseResponse<List<Verb>> GetVerb(string term, int level);
-
-
-        public Task<IBaseResponse<bool>> DeleteVerb(long id);
-
-        public Task<IBaseResponse<Verb>> Edit(long id, VerbViewModel model);
-
-        public Task<BaseResponse<Verb>> Save(VerbViewModel model);
     }
 }

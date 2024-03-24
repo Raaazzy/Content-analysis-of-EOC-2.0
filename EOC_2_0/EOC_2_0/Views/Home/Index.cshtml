@@ -1,55 +1,84 @@
 ﻿@model HomeViewModel
 
+@{
+    string[] levelNames = new string[6] {"запоминать", "понимать", "применять", "анализировать", "оценивать", "создавать"};
+}
+
 <div class="container">
         <main role="main" class="pb-3">
 
-          <body class="bg-light">
+        <body class="bg-light">
     
             <div class="container">
               <main>
-                <div class="py-5 text-center">
-                  <h2>Инструкция</h2>
-                  <p class="lead">Ниже приведен пример формы, полностью созданной с использованием элементов управления формы Bootstrap. Каждая требуемая группа форм имеет состояние проверки, которое может быть вызвано попыткой отправить форму без ее заполнения.</p>
-                </div>
+                    <div class="container">
+                        <h2>Инструкция</h2>
+                        <p class="lead" style="text-align: justify;">
+                            При определении результатов обучения Вы должны ориентироваться на образовательные результаты и/или компетенции,
+                            определенные в ОП, в рамках которой реализуется учебная дисциплина. То есть студент должен понимать, чему он научится -
+                            а вы должны понимать, в каких темах он этому научится и какими формами контроля вы это проверите. <br><br>
 
+                            <text style="font-weight: 400;">Планируемые результаты обучения рекомендуется формулировать в инфинитиве</text>: <br>
+                            <text style="color: limegreen; font-weight: 400;">"решать"</text>, <text style="color: limegreen; font-weight: 400;">"лепить"</text>, <text style="color: limegreen; font-weight: 400;">"анализировать"</text>.<br><br>
 
-                    
-                        @for(int i = 1; i < 7; i++)
+                            <text style="font-weight: 400;">Необходимо отойти от вспомогательных глаголов при составлении формулировок: </text><br>
+                            не <text style="color: red; font-weight: 400;">"умеет решать"</text>, а <text style="color: limegreen; font-weight: 400;">"решать"</text>;<br>
+                            не <text style="color: red; font-weight: 400;">"может провести анализ"</text>, а <text style="color: limegreen; font-weight: 400;">"анализировать"</text>.<br><br>
+
+                            <b style="font-weight: 400;">Результаты должны соответствовать принципу SMART</b>: <br>
+                            Specific - точным и ясным, <br>
+                            Measurable - измеряемым доступным способом, <br>
+                            Achievable - достижимым с учётом пререквизитов, <br>
+                            Relevant - релевантным курсу и дисциплине, <br>
+                            Time-limited - ограниченным продолжительностью курса.<br>
+                        </p>
+                    </div>
+
+                    <div id="content">
+                        @for (int i = 1; i < 7; i++)
                         {
-                                <h4>
-                                    Уровень @i: 
-                                </h4>
+                            <h4 style="margin-top: 30px;">
+                                Уровень @i: @levelNames[i - 1]
+                            </h4>
 
-                                <div class="input-group">
-                                <input type="text" name="str" id="str-@i" class="form-control" value="@Model.inputText.ElementAt(i - 1)" oninput="UpdateSearchList(@i)" onfocus="focusFunction(@i)" />
-                                </div>
+                            <div class="input-group">
+                                <input type="text" name="str" id="str-@i" class="form-control" value="@Model.inputText.ElementAt(i - 1)" oninput="UpdateSearchList(@i);" onfocus="focusFunction(@i);" />
+                            </div>
 
-                                <div id="wordList-@i" style="display: none;">
-                                    @Html.Partial("VerbsList", Model.allVerbs.ElementAt(i - 1))
-                                </div>
+                            <div id="wordList-@i" style="display: none; max-height: 300px; overflow: auto;">
+                                @Html.Partial("VerbsList", Model.allVerbs.ElementAt(i - 1))
+                            </div>
 
-                                <div id="wordList2-@i" style="display: none;">
-                                    @Html.Partial("NounsList", Model.allNouns.ElementAt(i - 1))
-                                </div>
+                            <div id="wordList2-@i" style="display: none; max-height: 300px; overflow: auto;">
+                                @Html.Partial("NounsList", Model.allNouns.ElementAt(i - 1))
+                            </div>
+
+                            <div id="warningMessage-@i" class="alert alert-warning mt-2" role="alert" style="display: none;">
+                                Обратите внимание на глагол, который Вы написали!
+                            </div>
                         }
+                    </div>
                     
+                    <button id="save-button" type="button" class="col-12 btn btn-sm btn-primary" style="margin-top: 30px; padding-top: 10px; padding-bottom: 10px;" onclick="SaveNewVerbs();">
+                        <h5>Отправить результаты</h5>
+                    </button>
+
+                    <div id="successMessage" class="mt-2" style="display: none;">
+                        <div class="alert alert-success mt-2" role="alert">Планируемые результаты обучения успешно сохранены!</div>
+                    </div>
                     
               </main>
             
               <footer class="my-5 pt-5 text-muted text-center text-small">
-                <p class="mb-1">© 2017–2021 Название компании</p>
-                <ul class="list-inline">
-                  <li class="list-inline-item"><a href="#">Конфиденциальность</a></li>
-                  <li class="list-inline-item"><a href="#">Условия</a></li>
-                  <li class="list-inline-item"><a href="#">Поддержка</a></li>
-                </ul>
+                    <p class="mb-1">© Курсовая работа 2024 Омирбековой Дарии </p>
+                
               </footer>
             </div>
             
             
                 <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
             
-                  <script src="form-validation.js" crossorigin="anonymous"></script>
+                <script src="form-validation.js" crossorigin="anonymous"></script>
               
             
             </body>
@@ -60,22 +89,9 @@
 
 @section pageScripts {
     <script>
-        function autoInput(str, i) {
-            var paragraphValue = document.getElementById(str).innerText;
-            var idStr = "str-" + i;
-            document.getElementById(idStr).value = paragraphValue + ' ';
+        function focusFunction(i) {
 
             UpdateSearchList(i);
-        };
-
-        function focusFunction(i) {
-            var idStr = "str-" + i;
-            var wordListDiv = "#wordList-" + i;
-            var wordList2Div = "#wordList2-" + i;
-            var inputText = document.getElementById(idStr).value;
-
-            $(wordListDiv).show();
-            $(wordList2Div).show();
 
             for (var index = 1; index <= 6; index++) {
                 if (index !== i) {
@@ -84,64 +100,119 @@
             }
         };
 
+        document.addEventListener("click", function (event) {
+            var targetDiv = document.getElementById("content");
+            var clickedInsideTargetDiv = targetDiv.contains(event.target);
+            if (!clickedInsideTargetDiv) {
+                clickOutOfInput()
+            }
+        });
+
+        function clickOutOfInput() {
+            for (var index = 1; index <= 6; index++) {
+                blurFunction(index);
+            }
+        };
+
+        function autoInput(str, i) {
+            var paragraphValue = document.getElementById(str).innerText;
+            var idStr = "str-" + i;
+            document.getElementById(idStr).value = paragraphValue + ' ';
+
+            UpdateSearchList(i);
+        };
+
+        function autoInputNoun(str) {
+            var paragraphValue = document.getElementById(str).innerText;
+            var i = (((document.getElementById(str).parentNode.parentNode.parentNode).id).split('-'))[1];
+            var idStr = "str-" + i;
+
+            var inputText = document.getElementById(idStr).value;
+            var words = inputText.split(' ');
+
+            words[1] = paragraphValue;
+            document.getElementById(idStr).value = words[0] + ' ' + words[1] + ' ';
+            UpdateSearchList(i);
+        };
+
         function blurFunction(i) {
             var idStr = "str-" + i;
-            var wordListDiv = "#wordList-" + i;
-            var wordList2Div = "#wordList2-" + i;
-            var inputText = document.getElementById(idStr).value;
-
-            $(wordListDiv).hide();
-            $(wordList2Div).hide();
+            var wordListDiv = "wordList-" + i;
+            var wordList2Div = "wordList2-" + i;
+            document.getElementById(wordListDiv).style.display = "none";
+            document.getElementById(wordList2Div).style.display = "none";
         };
 
         function UpdateSearchList(i) {
             var idStr = "str-" + i;
             var wordList = "#wordList-" + i;
             var inputText = document.getElementById(idStr).value;
-            var words = inputText.trim().split(' ');
+            var words = inputText.split(' ');
+
+            document.getElementById('successMessage').style.display = 'none';
 
             if (words.length <= 1) {
+                var wordListDiv = "wordList-" + i;
+                var wordList2Div = "wordList2-" + i;
+                document.getElementById(wordListDiv).style.display = "block";
+                document.getElementById(wordList2Div).style.display = "none";
+
                 $.ajax({
                     url: '@Url.Action("GetVerb", "Home")',
                     type: 'POST',
                     dataType: 'html',
-                    data: { 
+                    data: {
+                        verb: words[0],
                         str: inputText,
                         level: i
                     },
                     success: function (data) {
                         $(wordList).html(data);
+
+                        var warning = "warningMessage-" + i;
+                        if (!data.trim() || (inputText && inputText.trim().endsWith(' ') && $(wordList).find('.list-group-item').length > 1)) {
+                            document.getElementById(warning).style.display = 'block';
+                            document.getElementById(wordListDiv).style.display = "none";
+                        } else {
+                            document.getElementById(warning).style.display = 'none';
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
                     }
                 });
-                if (inputText.endsWith(' ')) {
 
-                    UpdateNounSearchList(i);
-                }
-            } else {
-
+            } else if (words.length < 3) {
                 UpdateNounSearchList(i);
+            } else {
+                var wordListDiv = "wordList-" + i;
+                var wordList2Div = "wordList2-" + i;
+                document.getElementById(wordListDiv).style.display = "none";
+                document.getElementById(wordList2Div).style.display = "none";
             }
+            return;
         };
 
         function UpdateNounSearchList(i) {
             var idStr = "str-" + i;
             var wordList2 = "#wordList2-" + i;
-            var inputText = document.getElementById(idStr).value;
-            var words = inputText.trim().split(' ');
 
-            if (words.length > 3) {
-                return;
-            }
+            var wordListDiv = "wordList-" + i;
+            var wordList2Div = "wordList2-" + i;
+            document.getElementById(wordListDiv).style.display = "none";
+            document.getElementById(wordList2Div).style.display = "block";
+
+            var inputText = document.getElementById(idStr).value;
+            var words = inputText.split(' ');
 
             $.ajax({
                 url: '@Url.Action("GetNoun", "Home")',
                 type: 'POST',
                 dataType: 'html',
                 data: {
-                    str: words[1]
+                    str: words[1],
+                    verb: words[0],
+                    level: i
                 },
                 success: function (data) {
                     $(wordList2).html(data);
@@ -150,6 +221,30 @@
                     console.error(xhr.responseText);
                 }
             });
+        };
+
+        function SaveNewVerbs() {
+            for (var i = 1; i <= 6; i++) {
+                var idStr = "str-" + i;
+                var inputText = document.getElementById(idStr).value;
+                var words = inputText.trim().split(' ');
+
+                $.ajax({
+                    url: '@Url.Action("SaveVerb", "Home")',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: {
+                        newVerb: words[0],
+                        level: i
+                    },
+                    success: function (data) {
+                        document.getElementById('successMessage').style.display = 'block';
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
         };
     </script>
 }

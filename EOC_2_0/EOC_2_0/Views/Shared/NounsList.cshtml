@@ -2,7 +2,7 @@
 
 @foreach (var noun in Model)
 {
-    <a class="list-group-item list-group-item-action lh-tight" onclick='autoInput("@noun.Id-noun");'>
+    <a class="list-group-item list-group-item-action lh-tight" onclick='autoInputNoun("@noun.Id-noun");'>
         <div class="d-flex w-70 align-items-center justify-content-between">
             <p id="@noun.Id-noun" class="mb-1">@noun.Word.ToString()</p>
         </div>
