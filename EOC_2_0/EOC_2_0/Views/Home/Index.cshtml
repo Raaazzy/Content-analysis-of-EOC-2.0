@@ -46,16 +46,45 @@
                             </div>
 
                             <div id="wordList-@i" style="display: none; max-height: 300px; overflow: auto;">
-                                @Html.Partial("VerbsList", Model.allVerbs.ElementAt(i - 1))
+                                @Html.Partial("VerbsList", Tuple.Create(Model.allVerbs.ElementAt(i - 1).ToList(), i))
                             </div>
 
                             <div id="wordList2-@i" style="display: none; max-height: 300px; overflow: auto;">
-                                @Html.Partial("NounsList", Model.allNouns.ElementAt(i - 1))
+                                @Html.Partial("NounsList", Tuple.Create(Model.allNouns.ElementAt(i - 1).ToList(), i))
                             </div>
 
                             <div id="warningMessage-@i" class="alert alert-warning mt-2" role="alert" style="display: none;">
                                 Обратите внимание на глагол, который Вы написали!
                             </div>
+
+                            for (int j = 1; j < 3; j++)
+                            {
+                                int num = j * 7 + i;
+                                <div id="input-line-@num" style="margin-top: 10px; display: none;">
+                                    <div class="input-group">
+                                        <input type="text" name="str" id="str-@num" class="form-control" value="" oninput="UpdateSearchList(@num);" onfocus="focusFunction(@num);" />
+                                    </div>
+
+                                    <div id="wordList-@num" style="display: none; max-height: 300px; overflow: auto;">
+                                        @Html.Partial("VerbsList", Tuple.Create(Model.allVerbs.ElementAt(i - 1).ToList(), num))
+                                    </div>
+
+                                    <div id="wordList2-@num" style="display: none; max-height: 300px; overflow: auto;">
+                                        @Html.Partial("NounsList", Tuple.Create(Model.allNouns.ElementAt(i - 1).ToList(), num))
+                                    </div>
+
+                                    <div id="warningMessage-@num" class="alert alert-warning mt-2" role="alert" style="display: none;">
+                                        Обратите внимание на глагол, который Вы написали!
+                                    </div>
+                                </div>
+                            }
+
+                            int num1 = 7 + i;
+                            int num2 = 14 + i;
+
+                            <button class="col-12 btn btn-sm btn-outline-primary" style="margin-top: 10px; padding-top: 5px; padding-bottom: 5px;" onclick="AddInputLine('@num1', '@num2');">
+                                <h6>Добавить поле</h6>
+                            </button>
                         }
                     </div>
                     
@@ -98,6 +127,18 @@
                     blurFunction(index);
                 }
             }
+
+            for (var index = 8; index <= 13; index++) {
+                if (index !== i) {
+                    blurFunction(index);
+                }
+            }
+
+            for (var index = 15; index <= 20; index++) {
+                if (index !== i) {
+                    blurFunction(index);
+                }
+            }
         };
 
         document.addEventListener("click", function (event) {
@@ -112,19 +153,25 @@
             for (var index = 1; index <= 6; index++) {
                 blurFunction(index);
             }
+            for (var index = 8; index <= 13; index++) {
+                blurFunction(index);
+            }
+            for (var index = 15; index <= 20; index++) {
+                blurFunction(index);
+            }
         };
 
         function autoInput(str, i) {
             var paragraphValue = document.getElementById(str).innerText;
+
             var idStr = "str-" + i;
             document.getElementById(idStr).value = paragraphValue + ' ';
 
             UpdateSearchList(i);
         };
 
-        function autoInputNoun(str) {
+        function autoInputNoun(str, i) {
             var paragraphValue = document.getElementById(str).innerText;
-            var i = (((document.getElementById(str).parentNode.parentNode.parentNode).id).split('-'))[1];
             var idStr = "str-" + i;
 
             var inputText = document.getElementById(idStr).value;
@@ -224,26 +271,41 @@
         };
 
         function SaveNewVerbs() {
-            for (var i = 1; i <= 6; i++) {
-                var idStr = "str-" + i;
-                var inputText = document.getElementById(idStr).value;
-                var words = inputText.trim().split(' ');
+            for (var i = 1; i < 7; i++) {
+                for (var j = 0; j < 3; j++) {
+                    var num = j * 7 + i;
 
-                $.ajax({
-                    url: '@Url.Action("SaveVerb", "Home")',
-                    type: 'POST',
-                    dataType: 'html',
-                    data: {
-                        newVerb: words[0],
-                        level: i
-                    },
-                    success: function (data) {
-                        document.getElementById('successMessage').style.display = 'block';
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+                    var idStr = "str-" + num;
+                    var inputText = document.getElementById(idStr).value;
+                    var words = inputText.trim().split(' ');
+
+                    $.ajax({
+                        url: '@Url.Action("SaveVerb", "Home")',
+                        type: 'POST',
+                        dataType: 'html',
+                        data: {
+                            newVerb: words[0],
+                            level: num
+                        },
+                        success: function (data) {
+                            document.getElementById('successMessage').style.display = 'block';
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }
+            }
+        };
+
+        function AddInputLine(num1, num2) {
+            var block1Id = "input-line-" + num1;
+            var block2Id = "input-line-" + num2;
+
+            if (document.getElementById(block1Id).style.display === 'none') {
+                document.getElementById(block1Id).style.display = 'block';
+            } else if (document.getElementById(block2Id).style.display === 'none') {
+                document.getElementById(block2Id).style.display = 'block';
             }
         };
     </script>

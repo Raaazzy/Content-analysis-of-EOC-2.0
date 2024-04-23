@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  SqlServerDb:
+    container_name: SqlServerContainer
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 8002:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123
+  eoc_2_0:
+    container_name: eoc_2_0Container
+    image: ${DOCKER_REGISTRY-}eoc20
+    build:
+      context: .
+      dockerfile: EOC_2_0/Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - SqlServerDb
+    environment:
+      - DB_HOST=SqlServerDb
+      - DB_NAME=EOC_2_0
+      - DB_SA_PASSWORD=123

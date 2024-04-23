@@ -7,6 +7,7 @@ using EOC_2_0.Service.Interfaces;
 using EOC_2_0.ViewModels;
 using EOC_2_0.Data.Enum;
 using EOC_2_0.Data.Response;
+using System;
 
 namespace EOC_2_0.Controllers
 {
@@ -57,23 +58,23 @@ namespace EOC_2_0.Controllers
         {
             if (!string.IsNullOrEmpty(str) && str.EndsWith(' '))
             {
-                return PartialView("VerbsList", new List<Verb>());
+                return PartialView("VerbsList", Tuple.Create(new List<Verb>(), level));
             }
 
             if (!string.IsNullOrEmpty(verb))
             {
-                var response = _verbService.GetVerb(verb, level);
+                var response = _verbService.GetVerb(verb, level % 7);
                 if (response.StatusCode == Data.Enum.StatusCode.Success)
                 {
-                    return PartialView("VerbsList", response.Data);
+                    return PartialView("VerbsList", Tuple.Create(response.Data, level));
                 }
                 return RedirectToAction("Error");
             }
 
-            var response2 = _verbService.GetVerbs(level);
+            var response2 = _verbService.GetVerbs(level % 7);
             if (response2.StatusCode == Data.Enum.StatusCode.Success)
             {
-                return PartialView("VerbsList", response2.Data);
+                return PartialView("VerbsList", Tuple.Create(response2.Data, level));
             }
             return RedirectToAction("Error", $"{response2.Description}");
         }
@@ -82,21 +83,21 @@ namespace EOC_2_0.Controllers
         public async Task<ActionResult> GetNoun(string str = null, string verb = null, int level = 0)
         {
             int verbId = 1;
-            var responseVerb = _verbService.GetVerb(verb, level);
+            var responseVerb = _verbService.GetVerb(verb, level % 7);
             if (responseVerb.StatusCode == Data.Enum.StatusCode.Success)
             {
                 if (responseVerb.Data.Count != 1)
                 {
-                    return PartialView("NounsList", new List<Noun>());
+                    return PartialView("NounsList", Tuple.Create(new List<Noun>(), level));
                 }
                 if (responseVerb.Data.Count == 1 && responseVerb.Data[0].Word != verb)
                 {
-                    return PartialView("NounsList", new List<Noun>());
+                    return PartialView("NounsList", Tuple.Create(new List<Noun>(), level));
                 }
                 verbId = responseVerb.Data[0].Id;
             } else
             {
-                return PartialView("NounsList", new List<Noun>());
+                return PartialView("NounsList", Tuple.Create(new List<Noun>(), level));
             }
 
             if (!string.IsNullOrEmpty(str))
@@ -104,7 +105,7 @@ namespace EOC_2_0.Controllers
                 var response = _nounService.GetNoun(str, verbId);
                 if (response.StatusCode == Data.Enum.StatusCode.Success)
                 {
-                    return PartialView("NounsList", response.Data);
+                    return PartialView("NounsList", Tuple.Create(response.Data, level));
                 }
                 return RedirectToAction("Error");
             }
@@ -122,12 +123,12 @@ namespace EOC_2_0.Controllers
         {
             if (!string.IsNullOrEmpty(newVerb))
             {
-                var responseVerb = _verbService.GetVerb(newVerb, level);
+                var responseVerb = _verbService.GetVerb(newVerb, level % 7);
                 if (responseVerb.StatusCode == Data.Enum.StatusCode.Success)
                 {
                     if (responseVerb.Data.Count == 0)
                     {
-                        var response = await _newVerbService.Create(newVerb, level);
+                        var response = await _newVerbService.Create(newVerb, level % 7);
                         if (response.StatusCode == Data.Enum.StatusCode.Success)
                         {
                             return View();

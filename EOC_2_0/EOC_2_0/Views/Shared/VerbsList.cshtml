@@ -1,8 +1,8 @@
-﻿@model List<Verb>
+﻿@model Tuple<List<Verb>, int>
 
-@foreach (var verb in Model)
+@foreach (var verb in Model.Item1)
 {
-    <a class="list-group-item list-group-item-action lh-tight" onclick='autoInput("@verb.Id-verb", "@verb.Level");'>
+    <a class="list-group-item list-group-item-action lh-tight" onclick='autoInput("@verb.Id-verb", "@Model.Item2");'>
         <div class="d-flex w-70 align-items-center justify-content-between">
             <p id="@verb.Id-verb" class="mb-1">@verb.Word.ToString()</p>
         </div>

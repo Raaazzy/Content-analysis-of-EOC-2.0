@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xeG7T/pOsVVnesptgw08whBWOqBd/d4tqLDNkXtiAf7edJCsJZMYiFnaJgRtHgRjEUtE+fepfU5ja4bMXZ21CQ==",
+  "dgSpecHash": "Ba0IsL1v5dc1CBUHoEib5sRENXYg3viO4Rs/MUA5+OcUlAFSgYzSZw+wnpzNbh+txMDJk8sYO8CcwKuQMN2XIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
   "expectedPackageFiles": [
@@ -58,6 +58,7 @@
     "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.8.0\\microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
     "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512",
     "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Дариджано\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
