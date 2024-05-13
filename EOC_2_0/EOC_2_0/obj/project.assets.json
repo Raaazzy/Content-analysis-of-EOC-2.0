@@ -4802,11 +4802,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
+      "projectUniqueName": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\repository\\Content-analysis-of-EOC-2.0\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
       "projectName": "EOC_2_0",
-      "projectPath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
+      "projectPath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\repository\\Content-analysis-of-EOC-2.0\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
       "packagesPath": "C:\\Users\\Дариджано\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\obj\\",
+      "outputPath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\repository\\Content-analysis-of-EOC-2.0\\EOC_2_0\\EOC_2_0\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Дариджано\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZqllCwCnsAYBVY+Zw/WRbcOjRsV/ncGr25NjOK+E+V2KYHQjP9xZm6sKoOzj49xPD1mv+Asmc1IeCcj6pd3Z1w==",
+  "dgSpecHash": "1Y0PW8vQjXeflhRM61VU9IhX+i8F4mugEmNPVXJSz7PctOY76gLonBigLpafKmOYIUNaBPibHSkAl435pRsDDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
+  "projectFilePath": "C:\\Users\\Дариджано\\Desktop\\Универ\\Курсач (3 курс)\\repository\\Content-analysis-of-EOC-2.0\\EOC_2_0\\EOC_2_0\\EOC_2_0.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Дариджано\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Дариджано\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
