@@ -8,9 +8,12 @@ using EOC_2_0.ViewModels;
 using EOC_2_0.Data.Enum;
 using EOC_2_0.Data.Response;
 using System;
+using Swashbuckle.Swagger;
 
 namespace EOC_2_0.Controllers
 {
+    //[Route("api/[controller]/[action]")]
+    //[ApiController]
     public class HomeController : Controller
     {
         private readonly IVerbService _verbService;
@@ -25,27 +28,20 @@ namespace EOC_2_0.Controllers
         }
 
         [HttpGet]
-        [HttpPost]
-        public async Task<ActionResult> IndexAsync(string str = null, int level = 1)
+        public async Task<ActionResult> IndexAsync()
         {
-            var response = _verbService.GetVerbs(level);
+            var response = _verbService.GetVerbs(1);
             var response2 = _nounService.GetNouns(1);
-            if (response.StatusCode == Data.Enum.StatusCode.Success)
+            if (response.StatusCode == Data.Enum.StatusCode.Success && response2.StatusCode == Data.Enum.StatusCode.Success)
             {
                 HomeViewModel obj = new HomeViewModel();
                 obj.allVerbs = new List<IEnumerable<Verb>>();
-                for (int i = 0; i < 6; i++)
-                {
-                    obj.allVerbs.Add(response.Data.Where(x => x.Level == i + 1).ToList());
-                }
                 obj.allNouns = new List<IEnumerable<Noun>>();
-                for (int i = 0; i < 6; i++)
-                {
-                    obj.allNouns.Add(response2.Data);
-                }
                 obj.inputText = new List<string>();
                 for (int i = 0; i < 6; i++)
                 {
+                    obj.allVerbs.Add(response.Data.Where(x => x.Level == i + 1).ToList());
+                    obj.allNouns.Add(response2.Data);
                     obj.inputText.Add(null);
                 }
                 return View(obj);
@@ -80,7 +76,7 @@ namespace EOC_2_0.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetNoun(string str = null, string verb = null, int level = 0)
+        public async Task<ActionResult> GetNoun(string noun = null, string verb = null, int level = 0)
         {
             int verbId = 1;
             var responseVerb = _verbService.GetVerb(verb, level % 7);
@@ -97,12 +93,12 @@ namespace EOC_2_0.Controllers
                 verbId = responseVerb.Data[0].Id;
             } else
             {
-                return PartialView("NounsList", Tuple.Create(new List<Noun>(), level));
+                return RedirectToAction("Error", $"{responseVerb.Description}");
             }
 
-            if (!string.IsNullOrEmpty(str))
+            if (!string.IsNullOrEmpty(noun))
             {
-                var response = _nounService.GetNoun(str, verbId);
+                var response = _nounService.GetNoun(noun, verbId);
                 if (response.StatusCode == Data.Enum.StatusCode.Success)
                 {
                     return PartialView("NounsList", Tuple.Create(response.Data, level));
@@ -113,7 +109,7 @@ namespace EOC_2_0.Controllers
             var response2 = _nounService.GetNouns(verbId);
             if (response2.StatusCode == Data.Enum.StatusCode.Success)
             {
-                return PartialView("NounsList", response2.Data);
+                return PartialView("NounsList", Tuple.Create(response2.Data, level));
             }
             return RedirectToAction("Error", $"{response2.Description}");
         }

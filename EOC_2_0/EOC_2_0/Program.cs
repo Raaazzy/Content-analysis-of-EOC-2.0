@@ -2,7 +2,7 @@ using EOC_2_0;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using EOC_2_0.Data;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -21,6 +21,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.InitializeRepositories();
 builder.Services.InitializeServices();
 
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -28,6 +35,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("./v1/swagger.json", "My API V1"));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

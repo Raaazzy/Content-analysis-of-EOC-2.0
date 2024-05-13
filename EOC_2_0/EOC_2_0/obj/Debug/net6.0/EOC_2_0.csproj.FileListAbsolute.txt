@@ -404,3 +404,11 @@ C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2
 C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\refs\Microsoft.Extensions.Logging.dll
 C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\refs\System.Text.Encodings.Web.dll
 C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\refs\System.Text.Json.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Дариджано\Desktop\Универ\Курсач (3 курс)\EOC_2_0\EOC_2_0\bin\Debug\net6.0\Swashbuckle.Core.dll

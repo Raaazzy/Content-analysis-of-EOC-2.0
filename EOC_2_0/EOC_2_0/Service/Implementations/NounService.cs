@@ -33,11 +33,11 @@ namespace Automarket.Service.Implementations
         {
             try
             {
-                var products = _nounRepository.GetAll().Where(x => x.VerbId == verbId && x.Word.StartsWith(term) && x.Word.Contains(term));
+                var verbs = _nounRepository.GetAll().Where(x => x.VerbId == verbId && x.Word.StartsWith(term) && x.Word.Contains(term));
 
                 return new BaseResponse<List<Noun>>()
                 {
-                    Data = products.ToList(),
+                    Data = verbs.ToList(),
                     StatusCode = StatusCode.Success
                 };
             }
@@ -55,8 +55,8 @@ namespace Automarket.Service.Implementations
         {
             try
             {
-                var products = _nounRepository.GetAll().Where(x => x.VerbId == verbId).ToList();
-                if (!products.Any())
+                var nouns = _nounRepository.GetAll().Where(x => x.VerbId == verbId).ToList();
+                if (!nouns.Any())
                 {
                     return new BaseResponse<List<Noun>>()
                     {
@@ -67,7 +67,7 @@ namespace Automarket.Service.Implementations
 
                 return new BaseResponse<List<Noun>>()
                 {
-                    Data = products,
+                    Data = nouns,
                     StatusCode = StatusCode.Success
                 };
             }
