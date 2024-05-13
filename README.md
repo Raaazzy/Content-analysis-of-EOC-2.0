@@ -1,5 +1,5 @@
-### Примечания:
-> БД, написанная на t-sql лежит - [тут](https://github.com/Raaazzy/Content-analysis-of-EOC-2.0/blob/main/EOC_2_0.bacpac)
+## Примечания:
+> БД, написанная на t-sql лежит - [тут](https://github.com/Raaazzy/Content-analysis-of-EOC-2.0/blob/main/EOC_2_0.bacpac) <br>
 Проект лежит - [тут](https://github.com/Raaazzy/Content-analysis-of-EOC-2.0/tree/main/EOC_2_0)
 
 Чтобы запустить Swagger необходимо <b>раскомментировать</b> в Controllers/HomeController строки и произвести запуск `IIS Express`:
@@ -14,20 +14,20 @@
 16. [ApiController]
 ```
 
-### Архитектура веб-приложения: 
+## Архитектура веб-приложения: 
 ![](images/architecture.png)
 
-### Схема работы веб-приложения: 
+## Схема работы веб-приложения: 
 ![](images/algorithm.png)
 
-### Схема БД:
+## Схема БД:
 ![](images/database.png)
 
-### Swagger:
+## Swagger:
 
 В веб-приложении только один контроллер "Home", в котором присутствуют следующие методы (actions): 
 
-##### 1. Index()
+#### 1. Index()
 Данный контроллер предназначен для инициализации списка глаголов и существительных на главной странице.
 
 Не принимает никаких парамметров.
@@ -38,7 +38,7 @@
 
 ![](images/index.png)
 
-##### 2. GetVerb(string verb, string str, int level)
+#### 2. GetVerb(string verb, string str, int level)
 
 Данный контроллер предназначен для вывода отфильтрованного списка глаголов (по уровню глагола и по уже написанным символам).
 
@@ -60,7 +60,7 @@
 
 ![](images/getVerb.png)
 
-##### 3. GetNoun(string noun, string verb, int level)
+#### 3. GetNoun(string noun, string verb, int level)
 
 Данный контроллер предназначен для вывода отфильтрованного списка существительных (по уровню введенного глагола и по уже написанным символам).
 
@@ -90,7 +90,7 @@
 
 ![](images/getNoun.png)
 
-##### 4. SaveVerb(string newVerb, int level)
+#### 4. SaveVerb(string newVerb, int level)
 
 Данный контроллер предназначен для сохранение глаголов, введенных пользователем и ранее не существовавших в БД.
 
