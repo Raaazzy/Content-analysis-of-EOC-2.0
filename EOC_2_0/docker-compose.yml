@@ -2,24 +2,29 @@ version: '3.4'
 
 services:
   SqlServerDb:
-    container_name: SqlServerContainer
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
-      - 8002:1433
+      - 1433:1433
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=123
+      - SA_PASSWORD=123videninSERG13
+    networks:
+      - eocnetwork
   eoc_2_0:
-    container_name: eoc_2_0Container
-    image: ${DOCKER_REGISTRY-}eoc20
+    image: pud
     build:
-      context: .
-      dockerfile: EOC_2_0/Dockerfile
+      context: ./EOC_2_0
+      dockerfile: Dockerfile
     ports:
-      - 8001:80
+      - 8080:8080
+      - 8081:8081
     depends_on:
       - SqlServerDb
     environment:
-      - DB_HOST=SqlServerDb
-      - DB_NAME=EOC_2_0
-      - DB_SA_PASSWORD=123
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - eocnetwork
+    restart: on-failure
+
+networks:
+  eocnetwork:

@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=DESKTOP-93AN5I5\\MSSQLSERVER02;Database=EOC_2_0;Password=123;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true;Encrypt=false"
+    "DefaultConnection": "Server=SqlServerDb,1433;Database=EOC_2_0;User Id=sa;Password=123videninSERG13;MultipleActiveResultSets=true;TrustServerCertificate=true;Encrypt=false"
   }
 }
