@@ -3,13 +3,16 @@ version: '3.4'
 services:
   SqlServerDb:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    build:
+      context: ./Db
+      dockerfile: Dockerfile
     ports:
       - 1433:1433
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=123videninSERG13
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d
       - sqlserver_data:/var/opt/mssql
     networks:
       - eocnetwork
