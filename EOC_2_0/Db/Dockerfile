@@ -1,21 +1,19 @@
-# Choose ubuntu version
 FROM mcr.microsoft.com/mssql/server:2022-latest
 
-# Create app directory
-WORKDIR /usr/src/app
+# Копируем файлы и скрипты и определяем их
+COPY init.sql ./docker-entrypoint-initdb.d/
+COPY entrypoint.sh ./docker-entrypoint-initdb.d/
+COPY import-data.sh ./docker-entrypoint-initdb.d/
 
-# Copy initialization scripts
-COPY . /usr/src/app
-             
-# Set environment variables, not have to write them with the docker run command
-# Note: make sure that your password matches what is in the run-initialization script 
-ENV SA_PASSWORD 123videninSERG13
-ENV ACCEPT_EULA Y
-ENV MSSQL_PID Express
+# Переключаемся на root для изменения разрешений
+USER root
 
-# Expose port 1433 in case accessing from other container
-# Expose port externally from docker-compose.yml
-EXPOSE 1433
+# Даем права на исполняемый файл
+RUN chmod +x ./docker-entrypoint-initdb.d/entrypoint.sh
 
-# Run Microsoft SQL Server and initialization script (at the same time)
-CMD /bin/bash ./entrypoint.sh
+# Возвращаемся обратно к пользователю mssql
+USER mssql
+
+# Говорим Docker, чтобы использовал наш entrypoint
+ENTRYPOINT ["/bin/bash", "./docker-entrypoint-initdb.d/entrypoint.sh"]
+

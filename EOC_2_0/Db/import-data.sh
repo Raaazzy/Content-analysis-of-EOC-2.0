@@ -1,0 +1,1 @@
+echo "Sleeping 90 sec" && sleep 90s && echo /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 123videninSerg13 -d EOC_2_0 -i /docker-entrypoint-initdb.d/setup.sql && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 123videninSERG13 -d EOC_2_0 -i /docker-entrypoint-initdb.d/setup.sql && echo "setup.sql completed"
